@@ -14,9 +14,18 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login
+                success_handler: App\Security\LoginSuccessHandler
+                failure_handler: App\Security\LoginFailureHandler
+
         main:
-            lazy: true
+            stateless: true
             provider: users
+            jwt: ~
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
